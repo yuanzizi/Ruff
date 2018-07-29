@@ -91,15 +91,12 @@ srv.listen(8080, '192.168.31.5', function() {
 
 var http = require('http');
 var server = http.createServer(function (req, res) {
-    res.writeHead(200, { 'Content-Type' : 'text/html; charset=UTF-8' }); //告诉相应头文件,返回数据的类型
-    res.write('<h1>Node.js</h1>');
-    res.write('<p>Hello World</p>');
-    res.end();
-});
-
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    res.end('okay');
+  });
 server.listen(8888);
 
-server.on('request', function (sock) {
+server.on('connection', function (sock) {
         sock.on('data', function (buffer) {
             var command = buffer.toString();
             $('#RELAY-1C').turnOn();
@@ -184,33 +181,6 @@ $.ready(function (error) {
 
     $('#button').on('push', function() {
         $('#RELAY-1C').turnOn();
-        for(var i=0;i<4;i++){
-          setTimeout(function () {
-            console.log('Button pushed.');
-            $('#RELAY-1C').isOn(function (error, state) {
-                if (!state) {
-                    $('#RELAY-1C').turnOn();
-                    console.log('RELAY-1C turn on 1:'+ i);
-                }
-                else {
-                    $('#RELAY-1C').turnOff();
-                    console.log('RELAY-1C turn off 1:'+ i);
-                }
-            });
-            setTimeout(function () {
-              $('#RELAY-1C').isOn(function (error, state) {
-                  if (!state) {
-                      $('#RELAY-1C').turnOn();
-                      console.log('RELAY-1C turn on2:'+ i);
-                  }
-                  else {
-                      $('#RELAY-1C').turnOff();
-                      console.log('RELAY-1C turn off2:'+ i);
-                  }
-              });
-            }, 100);
-          }, 100);
-      }
     });
 
     $('#button').on('release', function() {

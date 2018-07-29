@@ -1,5 +1,5 @@
 'use strict';
-
+var press_count = 0;//门铃按检测计数器
 /*
 var http = require('http');
 
@@ -113,8 +113,6 @@ server.on('listening', function () {
     });
 
 
-
-
 $.ready(function (error) {
     if (error) {
         console.log(error);
@@ -124,17 +122,16 @@ $.ready(function (error) {
 /*    $('#<irr-01>').on('data', function(data) {
     console.log('received data', data);
   });*/
+/* 检测门铃是否连续按了3次*/
 
-    $('#button').on('push', function() {
-        $('#RELAY-1C').turnOn();
-    });
-
-    $('#button').on('release', function() {
-        console.log('Button released.');
-
-        $('#RELAY-1C').turnOff();
-        $('#led-r').turnOff();
-    });
+  var timer = setInterval(function () {
+    if (press_count >= 2){ // 连续按3次，触发
+      open_door();
+      press_count = 0;
+    }else {
+      press_count = 0;
+    }
+  }，10000);
 
 });
 
@@ -144,7 +141,7 @@ $.end(function () {
 });
 
 
-var open_door = function() {
+function open_door() {
     $('#RELAY-1C').turnOff();
     setTimeout(function () {
       $('#RELAY-1C').isOn(function (error, state) {
@@ -171,4 +168,13 @@ var open_door = function() {
     $('#RELAY-1C').turnOff(function(){
       console.log('Open Door Success~!');
     });
+}
+
+
+function bind_device_event() {
+
+  $('#buttongpio').on('push', function() { // 只检测搞电压
+    console.log('Button push ：' + press_count);
+    press_count++;
+  });
 }
