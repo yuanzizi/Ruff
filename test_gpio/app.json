@@ -1,0 +1,18 @@
+{
+    "devices": [
+        {
+            "id": "buttongpio",
+            "model": "buttongpio",
+            "driver": "gpio",
+            "inputs": {
+                "gpio": {
+                    "type": "gpio",
+                    "args": {
+                        "direction": "in",
+                        "edge": "both"
+                    }
+                }
+            }
+        }
+    ]
+}

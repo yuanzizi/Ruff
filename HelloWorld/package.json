@@ -1,0 +1,14 @@
+{
+    "name": "helloworld",
+    "version": "0.1.0",
+    "description": "test lcd",
+    "author": "eric",
+    "main": "src/index.js",
+    "ruff": {
+        "dependencies": {
+            "button-gpio": "^2.0.9",
+            "relay-1c": "^2.0.5"
+        },
+        "version": 1
+    }
+}

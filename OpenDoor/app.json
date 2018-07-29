@@ -1,0 +1,39 @@
+{
+    "devices": [
+        {
+            "id": "button",
+            "model": "CK002",
+            "driver": "button-gpio",
+            "inputs": {
+                "gpio": {
+                    "type": "gpio",
+                    "args": {
+                        "direction": "in",
+                        "edge": "both"
+                    },
+                    "features": {
+                        "input": [
+                            "read",
+                            "interrupt"
+                        ]
+                    }
+                }
+            },
+            "featureVersion": "0.1"
+        },
+        {
+            "id": "RELAY-1C",
+            "model": "RELAY-1C",
+            "driver": "relay-1c",
+            "inputs": {
+                "gpio": {
+                    "type": "gpio",
+                    "args": {
+                        "direction": "out",
+                        "level": "high"
+                    }
+                }
+            }
+        }
+    ]
+}
